@@ -6,14 +6,11 @@ const StyledFooter = styled.footer`
 	display: flex;
 	color: #f0f0f0;
 	padding: 1.25em;
-	@media only screen and (max-width: 425px) {
-		flex-direction: column-reverse;
-	}
 `;
 
 const H3 = styled.h3`
-  color: palevioletred;
-  font-weight: 400;
+	color: palevioletred;
+	font-weight: 400;
 `;
 
 export default class Footer extends React.Component {

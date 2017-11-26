@@ -21,7 +21,7 @@ class HueLight extends React.Component {
 		let light = {
 			id: this.props.id,
 			color: color.hex
-		}
+		};
 		this.props.actions.updateColor(light);
 	}
 
@@ -30,7 +30,7 @@ class HueLight extends React.Component {
 			<div>
 				<h3>{this.props.name}</h3>
 				<HuePicker
-					color = { this.state.background }
+					color = {this.state.background}
 					onChangeComplete = {(color, event) => this.handleChange(color, event)}
 				/>
 			</div>
@@ -39,15 +39,15 @@ class HueLight extends React.Component {
 }
 
 function mapStateToProps(state) {
-  return {
-    state: state.hues
-  };
+	return {
+		state: state.hues
+	};
 }
 
 function matchDispatchToProps(dispatch) {
-  return {
-    actions: bindActionCreators(actions, dispatch),
-  }
+	return {
+		actions: bindActionCreators(actions, dispatch),
+	};
 }
 
 export default connect(mapStateToProps, matchDispatchToProps)(HueLight);
