@@ -1,7 +1,7 @@
 # mikumo
 Philips Hue Light Control App using a combination of Electron, React, Redux.
 
-![](http://puu.sh/ytHj0/3c2de5687d.png)
+![](http://puu.sh/yvGxF/7da6bb76ac.png)
 
 ## Getting Started
 To run the app yourself, clone the repo then run
