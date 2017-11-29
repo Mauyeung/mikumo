@@ -5,7 +5,7 @@ const StyledFooter = styled.footer`
 	background-color: #191919;
 	display: flex;
 	color: #f0f0f0;
-	padding: 1.25em;
+	padding: 0 1.25em;
 `;
 
 const H3 = styled.h3`

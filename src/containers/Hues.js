@@ -4,16 +4,17 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actions from '../actions/hues';
 import HueLight from '../components/HueLight';
+import HueGroup from '../components/HueGroup';
 
 const Page = styled.div`
-	background-color: #2a2d32;
+	background-color: #212121;
 	display: flex;
 	flex-direction: column;
 	height: 100vh;
 	width: 100%;
-	justify-content: center;
 	align-items: center;
 	color: #f0f0f0;
+	padding: 2em;
 `;
 
 const Ul = styled.ul`
@@ -26,18 +27,59 @@ const Li = styled.li`
 	margin: 0;
 	padding: 0;
 	display: table;
+	width: 100%;
+`;
+
+const Content = styled.div`
+	border: 1px #444444 solid;
+	overflow-y: hidden;
+	padding: 0;
+	max-height: 50%;
+	&:hover {
+		overflow-y: scroll;
+	}
+	&::-webkit-scrollbar {
+		display: none;
+	}
+`;
+
+const Container = styled.div`
+	width: 80%;
+	height: 100%;
+`;
+
+const H3 = styled.h3`
+	color: palevioletred;
+	font-weight: 400;
+	margin: 0.5em 0;
+	padding; 0;
+`;
+
+const H4 = styled.h4`
+	color: white;
+	font-weight: 400;
+	margin: 0.5em 0;
+	padding; 0;
 `;
 
 class Hues extends React.Component {
 
 	componentWillMount() {
-		this.props.actions.findHueLights();
+		this.props.actions.initialize();
 	}
 
 	renderAvailableLights() {
 		return this.props.state.lights.map((light) => {
 			return (
-				<HueLight key={light.id} id = {light.id} name={light.name} color={light.color}/>
+				<Li><HueLight key={light.id} metadata={light}/></Li>
+			);
+		});
+	}
+
+	renderAvailableGroups() {
+		return this.props.state.groups.map((group) => {
+			return (
+				<Li><HueGroup key={group.id} name={group.name}/></Li>
 			);
 		});
 	}
@@ -45,8 +87,17 @@ class Hues extends React.Component {
 	render() {
 		return (
 			<Page>
-				<h1>Currently Available Lights</h1>
-				<Ul>{this.renderAvailableLights()}</Ul>
+				<Container>
+					<H3>Lights</H3>
+					<Content>
+						<Ul>{this.renderAvailableLights()}{this.renderAvailableLights()}{this.renderAvailableLights()}</Ul>
+					</Content>
+					<H3>Groups</H3>
+					<Content>
+						<Ul>{this.renderAvailableGroups()}</Ul>
+					</Content>
+					<H4>Advanced</H4>
+				</Container>
 			</Page>
 		);
 	}

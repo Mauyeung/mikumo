@@ -9,6 +9,7 @@ import logger from 'redux-logger'
 import rootReducer  from './reducers';
 
 import styled from 'styled-components';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Home from "./containers/Home";
 import Hues from "./containers/Hues";
@@ -26,6 +27,7 @@ const Content = styled.div`
 
 ReactDOM.render(
 	<Provider store={store}>
+	<MuiThemeProvider>
 		<HashRouter>
 			<div>
 				<Content>
@@ -38,6 +40,7 @@ ReactDOM.render(
 				<Footer/>
 			</div>
 		</HashRouter>
+	</MuiThemeProvider>	
 	</Provider>,
 	app
 );
