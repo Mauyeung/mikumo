@@ -50,8 +50,8 @@ export const updateColor = (payload) => {
 		let rgb = converter.hexToRgb(payload.color);
 		let cie = converter.rgb_to_cie(rgb.r, rgb.g, rgb.b);
 		let data = {
-			"on": true,
-			"xy": cie,
+			'on': true,
+			'xy': cie,
 		}
 		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
@@ -85,7 +85,7 @@ export const updateColor = (payload) => {
 export const updateOnOff = (payload) => {
 	return (dispatch) => {
 		let data = {
-			"on": payload.on,
+			'on': payload.on,
 		}
 		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
@@ -119,7 +119,7 @@ export const updateOnOff = (payload) => {
 export const updateBrightness = (payload) => {
 	return (dispatch) => {
 		let data = {
-			"bri": payload.bri,
+			'bri': payload.bri,
 		}
 		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
@@ -153,7 +153,7 @@ export const updateBrightness = (payload) => {
 export const updateSaturation = (payload) => {
 	return (dispatch) => {
 		let data = {
-			"sat": payload.sat,
+			'sat': payload.sat,
 		}
 		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
@@ -187,7 +187,7 @@ export const updateSaturation = (payload) => {
 export const updateEffect = (payload) => {
 	return (dispatch) => {
 		let data = {
-			"effect": payload.effect,
+			'effect': payload.effect,
 		}
 		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {

@@ -1,10 +1,11 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actions from '../actions/hues';
 import HueLight from '../components/HueLight';
 import HueGroup from '../components/HueGroup';
+import HuesAdvanced from './HuesAdvanced';
 
 const Page = styled.div`
 	background-color: #212121;
@@ -48,21 +49,37 @@ const Container = styled.div`
 	height: 100%;
 `;
 
-const H3 = styled.h3`
+const AdvancedContainer = styled.div`
+	padding: 1em 0;
+`;
+
+const H3 = styled.h4`
 	color: palevioletred;
 	font-weight: 400;
 	margin: 0.5em 0;
+	margin-top: 1em;
 	padding; 0;
 `;
 
-const H4 = styled.h4`
+const H4 = styled.h5`
 	color: white;
 	font-weight: 400;
 	margin: 0.5em 0;
 	padding; 0;
+	&:hover {
+		cursor: pointer;
+	}
 `;
 
 class Hues extends React.Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			advancedSelected: false,
+		};
+	}
 
 	componentWillMount() {
 		this.props.actions.initialize();
@@ -84,6 +101,20 @@ class Hues extends React.Component {
 		});
 	}
 
+	handleAdvancedSelected() {
+		this.setState({advancedSelected: !this.state.advancedSelected});
+	}
+
+	renderAdvanced() {
+		if (this.state.advancedSelected) {
+			return (
+				<HuesAdvanced/>
+			);
+		} else {
+			return ;
+		}
+	}
+
 	render() {
 		return (
 			<Page>
@@ -96,7 +127,10 @@ class Hues extends React.Component {
 					<Content>
 						<Ul>{this.renderAvailableGroups()}</Ul>
 					</Content>
-					<H4>Advanced</H4>
+					<AdvancedContainer>
+						<H4 onClick={() => {this.handleAdvancedSelected()}}>Advanced</H4>
+						{this.renderAdvanced()}
+					</AdvancedContainer>
 				</Container>
 			</Page>
 		);

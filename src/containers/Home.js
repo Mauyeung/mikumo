@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import styled from 'styled-components';
 
 const Page = styled.div`
@@ -37,7 +37,7 @@ export default class Home extends React.Component {
 			<Page>
 				<H1>mikumo</H1>
 				<H3>A simple smart lights controller</H3>
-				<p>Created by<A href="https://github.com/Mauyeung">@Mauyeung</A></p>
+				<p>Created by<A href='https://github.com/Mauyeung'>@Mauyeung</A></p>
 			</Page>
 		);
 	}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import ReactDOM from 'react-dom';
 import styled from 'styled-components';
 import {HuePicker} from 'react-color';
@@ -9,14 +9,14 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import * as actions from '../actions/hues';
 
-const H4 = styled.h4`
+const H5 = styled.h5`
 	font-weight: 400;
 	margin: 0;
 	padding; 0;
 	flex-grow: 1;
 `;
 
-const H4v2 = styled.h4`
+const H5options = styled.h5`
 	font-weight: 300;
 	margin: 0;
 	padding; 0;
@@ -26,7 +26,7 @@ const H4v2 = styled.h4`
 const Light = styled.div`
 	align-items: center;
 	background: #191919;
-	padding: 1em 1.5em;
+	padding: 0.5em 1.5em;
 	border-bottom: solid 1px #444444;
 	&:hover {
 		cursor: pointer;
@@ -67,11 +67,6 @@ class HueLight extends React.Component {
 		super(props);
 
 		this.state = {
-			color: this.props.metadata.color,
-			effect: this.props.metadata.state.effect,
-			on: this.props.metadata.state.on,
-			bri: this.props.metadata.state.bri,
-			sat: this.props.metadata.state.sat,
 			selected: false,
 		};
 		this.handleClick = this.handleClick.bind(this);
@@ -94,7 +89,6 @@ class HueLight extends React.Component {
 	}
 
 	handleColorChange(color) {
-		this.setState({color: color.hex});
 		let light = {
 			id: this.props.metadata.id,
 			color: color.hex
@@ -103,7 +97,6 @@ class HueLight extends React.Component {
 	}
 
 	handleOnOff(value) {
-		this.setState({on: value});
 		let light = {
 			id: this.props.metadata.id,
 			on: value
@@ -113,7 +106,6 @@ class HueLight extends React.Component {
 
 	handleBrightnessChange(value) {
 		let temp = Math.round(value);
-		this.setState({bri: temp});
 		let light = {
 			id: this.props.metadata.id,
 			bri: temp
@@ -123,7 +115,6 @@ class HueLight extends React.Component {
 
 	handleSaturationChange(value) {
 		let temp = Math.round(value);
-		this.setState({sat: temp});
 		let light = {
 			id: this.props.metadata.id,
 			sat: temp
@@ -132,20 +123,17 @@ class HueLight extends React.Component {
 	}
 
 	handleEffect() {
-		let temp = this.state.effect;
-		console.log(temp);
+		console.log('inside loop')
+		let temp = this.props.metadata.state.effect;
 		if (temp === 'colorloop') {
 			temp = 'none';
 		} else {
 			temp = 'colorloop';
 		}
-		this.setState({effect: temp});
-		console.log(this.state.effect);
 		let light = {
 			id: this.props.metadata.id,
 			effect: temp
 		};
-		console.log(light);
 		this.props.actions.updateEffect(light);
 	}
 
@@ -155,39 +143,40 @@ class HueLight extends React.Component {
 				<OptionsContainer>
 					<div>
 						<PickerContainer>
-						<H4v2>Color</H4v2>
+						<H5options>Color</H5options>
 							<PickerWarpper>
 								<HuePicker
-									color={this.state.color}
+									color={this.props.metadata.color}
 									onChangeComplete = {(color) => this.handleColorChange(color)}
 								/>
 							</PickerWarpper>
 						</PickerContainer>
 						<SliderContainer>
-							<H4v2>Brightness</H4v2>
+							<H5options>Brightness</H5options>
 							<Slider 
 								sliderStyle={{margin:0}}
-								defaultValue={this.state.bri}
+								defaultValue={this.props.metadata.state.bri}
 								min={0}
 								max={254}
 								onChange={(event, value) => this.handleBrightnessChange(value)}
 							/>
 						</SliderContainer>
 						<SliderContainer>
-							<H4v2>Saturation</H4v2>
+							<H5options>Saturation</H5options>
 							<Slider sliderStyle={{margin:0}}
-								defaultValue={this.state.sat}
+								defaultValue={this.props.metadata.state.sat}
 								min={0}
 								max={254}
 								onChange={(event, value) => this.handleSaturationChange(value)}
 							/>
 						</SliderContainer>
 						<ToggleContainer>
-							<H4v2>Color Loop</H4v2>
+							<H5options>Color Loop</H5options>
 							<div>
 							<Toggle  
-								defaultToggled={this.state.effect === 'colorloop'? true : false}
+								defaultToggled={this.props.metadata.state.effect === 'colorloop'? true : false}
 								onToggle={() => this.handleEffect()}
+								toggled={this.props.metadata.state.effect === 'colorloop'? true : false}
 							/>
 							</div>
 						</ToggleContainer>
@@ -201,19 +190,18 @@ class HueLight extends React.Component {
 
 	render() {
 		let colorSync = {
-			color: this.state.color
+			color: this.props.metadata.color
 		}
 		return (
 			<div ref={(node) => {this.node = node}}>
 				<Light>
 					<SelectedContainer>
-						<H4>{this.props.metadata.name}</H4>
+						<H5>{this.props.metadata.name}</H5>
 						<div>
 							<Toggle 
-								defaultToggled={this.state.on}
-								trackSwitchedStyle={{backgroundColor: this.state.color}}
-								thumbSwitchedStyle={{backgroundColor: '#f0f0f0'}}
-								onToggle={() => this.handleOnOff(!this.state.on)}
+								defaultToggled={this.props.metadata.state.on}
+								toggled={this.props.metadata.state.on}
+								onToggle={() => this.handleOnOff(!this.props.metadata.state.on)}
 							/>
 						</div>
 					</SelectedContainer>

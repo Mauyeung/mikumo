@@ -1,5 +1,5 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React from 'react';
+import {NavLink} from 'react-router-dom';
 import styled from 'styled-components';
 
 const StyledNav = styled.nav`
@@ -48,8 +48,8 @@ export default class Navigation extends React.Component {
 		return (
 			<StyledNav>
 				<Ul>
-					<Li><StyledLink to="/">Home</StyledLink></Li>
-					<Li><StyledLink to="/hues">Hues</StyledLink></Li>
+					<Li><StyledLink to='/'>Home</StyledLink></Li>
+					<Li><StyledLink to='/hues'>Hues</StyledLink></Li>
 				</Ul>
 			</StyledNav>
 		);
