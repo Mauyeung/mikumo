@@ -1,9 +1,11 @@
 import axios from 'axios';
+import {config} from '../config/config';
 import * as converter from '../util/cie-rgb-converter';
 
 export const initialize = () => {
 	return (dispatch) => {
-		axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c').then((response) => {
+		let url = 'http://' + config.bridge + '/api/' + config.username;
+		axios.get(url).then((response) => {
 			let lights = [];
 			let all_lights = response.data.lights;
 			console.log(all_lights);
@@ -53,9 +55,10 @@ export const updateColor = (payload) => {
 			'on': true,
 			'xy': cie,
 		}
-		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
+		let url = 'http://' + config.bridge + '/api/' + config.username + '/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
-			axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights').then((response) => {
+			let url = 'http://' + config.bridge + '/api/' + config.username + '/lights';
+			axios.get(url).then((response) => {
 				let lights = [];
 				let all_lights = response.data;
 				for (let key in all_lights) {
@@ -87,9 +90,10 @@ export const updateOnOff = (payload) => {
 		let data = {
 			'on': payload.on,
 		}
-		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
+		let url = 'http://' + config.bridge + '/api/' + config.username + '/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
-			axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights').then((response) => {
+			let url = 'http://' + config.bridge + '/api/' + config.username + '/lights';
+			axios.get(url).then((response) => {
 				let lights = [];
 				let all_lights = response.data;
 				for (let key in all_lights) {
@@ -121,9 +125,10 @@ export const updateBrightness = (payload) => {
 		let data = {
 			'bri': payload.bri,
 		}
-		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
+		let url = 'http://' + config.bridge + '/api/' + config.username + '/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
-			axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights').then((response) => {
+			let url = 'http://' + config.bridge + '/api/' + config.username + '/lights';
+			axios.get(url).then((response) => {
 				let lights = [];
 				let all_lights = response.data;
 				for (let key in all_lights) {
@@ -155,9 +160,10 @@ export const updateSaturation = (payload) => {
 		let data = {
 			'sat': payload.sat,
 		}
-		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
+		let url = 'http://' + config.bridge + '/api/' + config.username + '/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
-			axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights').then((response) => {
+			let url = 'http://' + config.bridge + '/api/' + config.username + '/lights';
+			axios.get(url).then((response) => {
 				let lights = [];
 				let all_lights = response.data;
 				for (let key in all_lights) {
@@ -189,9 +195,10 @@ export const updateEffect = (payload) => {
 		let data = {
 			'effect': payload.effect,
 		}
-		let url = 'http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights/' + payload.id + '/state';
+		let url = 'http://' + config.bridge + '/api/' + config.username + '/lights/' + payload.id + '/state';
 		axios.put(url, data).then((response) => {
-			axios.get('http://192.168.2.10/api/3fb8fabf28e700e14d0825c36e0eb78c/lights').then((response) => {
+			let url = 'http://' + config.bridge + '/api/' + config.username + '/lights';
+			axios.get(url).then((response) => {
 				let lights = [];
 				let all_lights = response.data;
 				for (let key in all_lights) {

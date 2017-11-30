@@ -18,19 +18,6 @@ const Page = styled.div`
 	padding: 2em;
 `;
 
-const Ul = styled.ul`
-	padding: 0;
-	margin: 0;
-`;
-
-const Li = styled.li`
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	display: table;
-	width: 100%;
-`;
-
 const Content = styled.div`
 	border: 1px #444444 solid;
 	overflow-y: hidden;
@@ -88,7 +75,7 @@ class Hues extends React.Component {
 	renderAvailableLights() {
 		return this.props.state.lights.map((light) => {
 			return (
-				<Li><HueLight key={light.id} metadata={light}/></Li>
+				<HueLight key={light.id} metadata={light}/>
 			);
 		});
 	}
@@ -96,7 +83,7 @@ class Hues extends React.Component {
 	renderAvailableGroups() {
 		return this.props.state.groups.map((group) => {
 			return (
-				<Li><HueGroup key={group.id} name={group.name}/></Li>
+				<HueGroup key={group.id} name={group.name}/>
 			);
 		});
 	}
@@ -121,11 +108,11 @@ class Hues extends React.Component {
 				<Container>
 					<H3>Lights</H3>
 					<Content>
-						<Ul>{this.renderAvailableLights()}{this.renderAvailableLights()}{this.renderAvailableLights()}</Ul>
+						{this.renderAvailableLights()}
 					</Content>
 					<H3>Groups</H3>
 					<Content>
-						<Ul>{this.renderAvailableGroups()}</Ul>
+						{this.renderAvailableGroups()}
 					</Content>
 					<AdvancedContainer>
 						<H4 onClick={() => {this.handleAdvancedSelected()}}>Advanced</H4>
